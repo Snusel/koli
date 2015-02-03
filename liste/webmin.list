@@ -1,0 +1,3 @@
+# Webmin repository list - created 2014-11-06 13:14 UTC
+# http://webmin.com
+deb http://download.webmin.com/download/repository sarge contrib
