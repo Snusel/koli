@@ -4,8 +4,8 @@
 #Bitte anpassen:
 
 MYSQLDIR=
-MYSQLDB=webseite
-MYSQLDBFO=board
+MYSQLDB=
+MYSQLDBFO=
 WEBDIR=
 WEBDIR2=
 WEB=
