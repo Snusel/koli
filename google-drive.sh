@@ -14,12 +14,18 @@ DIR4="/home/sdb/kolibri/google-drive-snusel/Anime-DVD"
 
 USER="snusel"
 GRUPPE="snusel"
+LOGS="/home/sdb/kolibri/google-drive-log"
 
 ############### Script ####################
+
+DATE="$(date +%y-%m-%d_%H:%M:%S)"
 
 sudo chgrp -R $GRUPPE $DIR1/ && sudo chown -R $USER $DIR1/
 sudo chgrp -R $GRUPPE $DIR2/ && sudo chown -R $USER $DIR2/
 
+ls $DIR1/*.rar >> $LOGS/$DATE-datei-log-BD.txt
+ls $DIR2/*.rar >> $LOGS/$DATE-datei-log-DVD.txt
+
 for file in $DIR1/*.rar; do
      mv "$file" "${file// /_}"
 done
@@ -39,15 +45,15 @@ done
 for file in $DIR1/*.rar; do
 	filename_1="${file%.*}"
 	filename="${filename_1##*/}"
-	mkdir -m 0775 -p $DIR3/"$filename"
+	sudo -u $USER mkdir -m 0775 -p -v $DIR3/"$filename" >> $LOGS/$DATE-mkdir-log-BD.txt
 	cp -a "$file" $DIR3/"$filename"
-	rm "$file"
+	rm -v "$file" >> $LOGS/$DATE-rm-log-BD.txt
 done
 
 for file in $DIR2/*.rar; do
 	filename_1="${file%.*}"
 	filename="${filename_1##*/}"
-	mkdir -m 0775 -p $DIR4/"$filename"
+	sudo -u $USER mkdir -m 0775 -p -v $DIR4/"$filename" >> $LOGS/$DATE-mkdir-log-DVD.txt
 	cp -a "$file" $DIR4/"$filename"
-	rm "$file"
+	rm -v "$file" >> $LOGS/$DATE-rm-log-DVD.txt
 done
